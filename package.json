@@ -4,8 +4,9 @@
   "description": "NodeJS, TypeScript, GraphQL, Jest - Boilerplate",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "prepare": "husky install"
+    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
+    "prepare": "husky install",
+    "dev": "NODE_ENV=development nodemon"
   },
   "repository": {
     "type": "git",
