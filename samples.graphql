@@ -6,7 +6,7 @@ query {
 
 mutation {
   createTodo(createTodoData: {
-    content:"Test"
+    content:"Test1"
   }), {
     _id
   }
