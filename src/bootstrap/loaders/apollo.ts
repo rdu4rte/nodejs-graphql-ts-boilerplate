@@ -1,11 +1,12 @@
 import { ApolloServer } from 'apollo-server-express'
 import { config } from '../../config'
+import { gqlbuildSchema } from '../../utils/buildSchema'
 
 export default async (): Promise<ApolloServer> => {
-  // const schema = await buildSchema()
+  const schema = await gqlbuildSchema()
 
   return new ApolloServer({
-    // schema,
+    schema,
     playground: config.isDev
   })
 }

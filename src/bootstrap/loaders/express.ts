@@ -9,5 +9,7 @@ export default async (app: Application): Promise<void> => {
 
   app.use(cors())
 
-  app.use(helmet())
+  app.use(helmet({
+    contentSecurityPolicy: false
+  }))
 }
