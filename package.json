@@ -2,11 +2,11 @@
   "name": "nodejs-graphql-ts-boilerplate",
   "version": "1.0.0",
   "description": "NodeJS, TypeScript, GraphQL, Jest - Boilerplate",
-  "main": "index.js",
+  "main": "dist/server.js",
   "scripts": {
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
     "prepare": "husky install",
-    "dev": "NODE_ENV=development nodemon"
+    "dev": "NODE_ENV=development nodemon ./src/server.ts"
   },
   "repository": {
     "type": "git",
