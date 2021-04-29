@@ -1,0 +1,13 @@
+query {
+  getTodo(id:"608ac3093da7c763b8b4e323"), {
+    content
+  }
+}
+
+mutation {
+  createTodo(createTodoData: {
+    content:"Test"
+  }), {
+    _id
+  }
+}
