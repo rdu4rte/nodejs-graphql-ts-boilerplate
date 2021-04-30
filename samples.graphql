@@ -1,13 +1,47 @@
-query {
-  getTodo(id:"608ac3093da7c763b8b4e323"), {
-    content
+
+query GET_BY_ID {
+  getTodo(id: "608b46024f871d4160415214"),
+  {
+    _id,
+    content,
+    createdAt
   }
 }
 
-mutation {
+query FETCH_ALL {
+  getAll {
+    _id,
+    content,
+    createdAt,
+    done
+  }
+}
+
+mutation CREATE_NEW {
   createTodo(createTodoData: {
-    content:"Test1"
+    content: "Teste 3"
   }), {
-    _id
+    _id,
+    content,
+    createdAt
+  }
+}
+
+mutation UPDATE_ONE {
+  updateOne(
+    updateContent: { content: "Teste Updatado" },
+    id: "608b46024f871d4160415214"
+  ), {
+    _id,
+    content,
+    createdAt
+  }
+}
+
+mutation DELETE_ONE {
+  delete(
+    id: "608b497f973f762f24d12efc"
+  ), {
+  	_id
   }
 }
