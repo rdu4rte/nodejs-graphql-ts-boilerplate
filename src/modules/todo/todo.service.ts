@@ -6,7 +6,7 @@ import { TodoDto } from './todo.dto'
 
 @Service()
 export default class TodoService {
-  constructor(private readonly todoModel: TodoModel) {}
+  constructor(private readonly todoModel: TodoModel) { }
 
   public async getById(_id: ObjectId): Promise<Todo | null> {
     return this.todoModel.getById(_id)
@@ -18,5 +18,17 @@ export default class TodoService {
     // business logic here ...
 
     return newTodo
+  }
+
+  public async getAll(): Promise<Todo[]> {
+    return this.todoModel.find()
+  }
+
+  public async updateOne(id: ObjectId, data: TodoDto): Promise<Todo | null> {
+    return this.todoModel.update(id, data)
+  }
+
+  public async deleteOne(id: ObjectId): Promise<Todo | null> {
+    return this.todoModel.delete(id)
   }
 }

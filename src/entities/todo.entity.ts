@@ -1,13 +1,14 @@
 import { Field, ObjectType } from 'type-graphql'
 import { ObjectId } from 'mongodb'
-import { prop } from '@typegoose/typegoose'
+import { index, prop } from '@typegoose/typegoose'
 
 @ObjectType()
+@index({ content: 1 }, { unique: true })
 export class Todo {
   @Field()
   readonly _id!: ObjectId
 
-  @prop()
+  @prop({ default: Date.now })
   @Field(() => Date)
   createdAt!: Date
 

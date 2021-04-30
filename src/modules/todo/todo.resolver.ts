@@ -8,16 +8,30 @@ import { TodoDto } from './todo.dto'
 @Service()
 @Resolver((of) => Todo)
 export default class TodoResolver {
-  constructor(private readonly todoService: TodoService) {}
+  constructor(private readonly todoService: TodoService) { }
 
   @Query((returns) => Todo)
   async getTodo(@Arg('id') id: ObjectId): Promise<Todo | null> {
     return await this.todoService.getById(id)
   }
 
+  @Query((returns) => [Todo])
+  async getAll(): Promise<Todo[]> {
+    return await this.todoService.getAll()
+  }
+
   @Mutation((returns) => Todo)
   async createTodo(@Arg('createTodoData') createTodoData: TodoDto): Promise<Todo> {
-    console.log(createTodoData)
     return await this.todoService.addTodo(createTodoData)
+  }
+
+  @Mutation((returns) => Todo)
+  async updateOne(@Arg('updateContent') updateContent: TodoDto, @Arg('id') id: ObjectId): Promise<Todo | null> {
+    return await this.todoService.updateOne(id, updateContent)
+  }
+
+  @Mutation((returns) => Todo)
+  async delete(@Arg('id') id: ObjectId): Promise<Todo | null> {
+    return await this.todoService.deleteOne(id)
   }
 }

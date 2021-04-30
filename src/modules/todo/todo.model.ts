@@ -19,4 +19,16 @@ export default class TodoModel {
     await todo.save()
     return todo
   }
+
+  async find(): Promise<Todo[]> {
+    return await TodoMongooseModel.find()
+  }
+
+  async update(id: ObjectId, data: TodoDto): Promise<Todo | null> {
+    return await TodoMongooseModel.findByIdAndUpdate(id, data)
+  }
+
+  async delete(id: ObjectId): Promise<Todo | null> {
+    return await TodoMongooseModel.findByIdAndDelete(id)
+  }
 }
