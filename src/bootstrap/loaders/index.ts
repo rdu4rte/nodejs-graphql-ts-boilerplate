@@ -7,7 +7,7 @@ import expressLoader from './express'
 import mongooseLoader from './mongoose'
 
 export default async (app: Application): Promise<ApolloServer> => {
-  await expressLoader(app)
-  await mongooseLoader()
+  await expressLoader(app).then(() => console.log('express loaded'))
+  await mongooseLoader().then(() => console.log('mongodb connected'))
   return apolloLoader()
 }

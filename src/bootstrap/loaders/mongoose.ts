@@ -9,7 +9,10 @@ process.on('SIGNINT', async () => {
 
 export const mongoDbConfig = {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+  useCreateIndex: true,
+  autoIndex: true
 }
 
 // mongoose setup
