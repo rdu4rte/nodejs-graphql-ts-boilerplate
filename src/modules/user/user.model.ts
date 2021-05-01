@@ -16,4 +16,9 @@ export default class UserModel {
   async getAll(): Promise<User[]> {
     return await UserMongooseModel.find()
   }
+
+  async findByUsername(username: string): Promise<User | null> {
+    const user = await UserMongooseModel.findOne({ username: username }).select('+password')
+    return user
+  }
 }

@@ -1,8 +1,12 @@
 import { Service } from 'typedi'
 import UserModel from './user.model'
-import { UserDto } from './user.dto'
+import { UserDto } from './dto/user.dto'
 import { User } from '../../entities/user.entity'
 import { hashPassword } from '../../helpers'
+import { CredentialsDto, JwtResponse } from './dto/credentials.dto'
+import { matchPassword } from '../../helpers/match-password.helper'
+import { Logger } from '../../config'
+import { generateJwtToken } from '../../helpers/generate-token.helper'
 
 @Service()
 export default class UserService {
@@ -25,5 +29,22 @@ export default class UserService {
 
   public async fetchUsers(): Promise<User[]> {
     return await this.userModel.getAll()
+  }
+
+  public async login(credentials: CredentialsDto): Promise<JwtResponse> {
+    const user = await this.userModel.findByUsername(credentials.username)
+
+    if (!user) {
+      Logger.error('No user found')
+      throw new Error('No user found')
+    }
+
+    const isMatch: boolean = await matchPassword(user.password, credentials.password)
+
+    if (user && isMatch) {
+      return await generateJwtToken(user)
+    } else {
+      throw new Error('Authentication failed')
+    }
   }
 }
