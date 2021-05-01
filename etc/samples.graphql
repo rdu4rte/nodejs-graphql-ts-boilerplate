@@ -1,47 +1,90 @@
-
 query GET_BY_ID {
-  getTodo(id: "608b46024f871d4160415214"),
-  {
-    _id,
-    content,
+  getTodo(id: "608b46024f871d4160415214") {
+    _id
+    content
     createdAt
+    done
   }
 }
 
 query FETCH_ALL {
   getAll {
-    _id,
-    content,
-    createdAt,
+    _id
+    content
+    createdAt
     done
+    _user {
+      _id
+    }
   }
 }
 
-mutation CREATE_NEW {
-  createTodo(createTodoData: {
-    content: "Teste 3"
-  }), {
-    _id,
-    content,
+query FETCH_DONE {
+  getByDone {
+    _id
+    content
+    done
+    createdAt
+  }
+}
+
+mutation DELETE_ONE {
+  delete(id: "608b497f973f762f24d12efc") {
+    _id
+  }
+}
+
+mutation CREATE_NEW_TODO {
+  createTodo(createTodoData: { content: "Teste 3" }) {
+    _id
+    content
     createdAt
   }
 }
 
 mutation UPDATE_ONE {
   updateOne(
-    updateContent: { content: "Teste Updatado" },
+    updateContent: {
+      #content: "Teste Updatado"
+      done: true
+    }
     id: "608b46024f871d4160415214"
-  ), {
-    _id,
-    content,
+  ) {
+    _id
+    content
+    createdAt
+    done
+  }
+}
+
+mutation CREATE_NEW_USER {
+  createUser(
+    createUser: {
+      username: "usertest13"
+      email: "usertest13@mail.com"
+      password: "123123"
+      password_confirm: "1231231"
+    }
+  ) {
+    _id
+    username
+    email
     createdAt
   }
 }
 
-mutation DELETE_ONE {
-  delete(
-    id: "608b497f973f762f24d12efc"
-  ), {
-  	_id
+query GET_USERS {
+  getUsers {
+    username
+    email
+  }
+}
+
+mutation LOGIN {
+  login(credentials: {
+    username: "usertest12",
+    password: "123123"
+  }), {
+    token
   }
 }
