@@ -20,6 +20,7 @@ export interface Config {
     host: string
     port: number
   }
+  argonSalt: number
 }
 
 export const config: Config = {
@@ -32,5 +33,6 @@ export const config: Config = {
   redis: {
     port: +env('REDIS_PORT'),
     host: env('REDIS_HOST')
-  }
+  },
+  argonSalt: +env('SALT')
 }

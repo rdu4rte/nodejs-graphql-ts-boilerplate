@@ -31,4 +31,8 @@ export default class TodoService {
   public async deleteOne(id: ObjectId): Promise<Todo | null> {
     return this.todoModel.delete(id)
   }
+
+  public async findByDone(): Promise<Todo[]> {
+    return this.todoModel.findByDone()
+  }
 }

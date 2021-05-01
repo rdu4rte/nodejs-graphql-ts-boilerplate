@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 
 import bootstrap from './bootstrap'
-import { config } from './config'
+import { config, Logger } from './config'
 bootstrap(config).catch(err => {
-  console.log(err)
+  Logger.error(err)
 })

@@ -11,7 +11,7 @@ export const TodoMongooseModel = getModelForClass(Todo)
 export default class TodoModel {
   async getById(_id: ObjectId): Promise<Todo | null> {
     // default mongoose use
-    return TodoMongooseModel.findById(_id).lean().exec()
+    return await TodoMongooseModel.findById(_id).lean().exec()
   }
 
   async create(data: TodoDto): Promise<Todo> {
@@ -30,5 +30,9 @@ export default class TodoModel {
 
   async delete(id: ObjectId): Promise<Todo | null> {
     return await TodoMongooseModel.findByIdAndDelete(id)
+  }
+
+  async findByDone(): Promise<Todo[]> {
+    return await TodoMongooseModel.find({ done: true })
   }
 }

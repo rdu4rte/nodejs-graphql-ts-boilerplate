@@ -16,6 +16,8 @@ module.exports = {
     '@typescript-eslint/no-namespace': 0,
     '@typescript-eslint/space-before-function-paren': 0,
     '@typescript-eslint/method-signature-style': 0,
+    '@typescript-eslint/array-type': 0,
+    '@typescript-eslint/naming-convention': 0,
     'import/export': 0,
     'eol-last': 0,
     semi: [2, 'never']

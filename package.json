@@ -43,8 +43,9 @@
     "typescript": "^4.2.4"
   },
   "dependencies": {
-    "@typegoose/typegoose": "^7.6.0",
+    "@typegoose/typegoose": "^7.4.2",
     "apollo-server-express": "^2.23.0",
+    "argon2": "^0.27.2",
     "class-validator": "^0.13.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -54,6 +55,7 @@
     "mongoose": "^5.10.18",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^1.1.1",
-    "typedi": "^0.10.0"
+    "typedi": "^0.10.0",
+    "winston": "^3.3.3"
   }
 }

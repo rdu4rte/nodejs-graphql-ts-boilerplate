@@ -20,6 +20,11 @@ export default class TodoResolver {
     return await this.todoService.getAll()
   }
 
+  @Query((returns) => [Todo])
+  async getByDone(): Promise<Todo[]> {
+    return await this.todoService.findByDone()
+  }
+
   @Mutation((returns) => Todo)
   async createTodo(@Arg('createTodoData') createTodoData: TodoDto): Promise<Todo> {
     return await this.todoService.addTodo(createTodoData)

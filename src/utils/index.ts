@@ -1,2 +1,2 @@
-// export * from './buildSchema'
+export * from './buildSchema'
 export * from './scalars'

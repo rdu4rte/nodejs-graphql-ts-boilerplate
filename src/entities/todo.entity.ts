@@ -1,6 +1,7 @@
 import { Field, ObjectType } from 'type-graphql'
 import { ObjectId } from 'mongodb'
-import { index, prop } from '@typegoose/typegoose'
+import { index, prop, Ref } from '@typegoose/typegoose'
+import { User } from './user.entity'
 
 @ObjectType()
 @index({ content: 1 }, { unique: true })
@@ -23,4 +24,8 @@ export class Todo {
   @prop({ default: false })
   @Field()
   done!: boolean
+
+  @prop({ ref: () => User })
+  @Field(() => User, { nullable: true })
+  _user?: Ref<User>
 }

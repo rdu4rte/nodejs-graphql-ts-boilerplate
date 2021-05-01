@@ -2,7 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 
 import loaders from './loaders'
-import { Config } from '../config'
+import { Config, Logger } from '../config'
 
 export default async (config: Config): Promise<void> => {
   const app = express()
@@ -17,5 +17,7 @@ export default async (config: Config): Promise<void> => {
     }
   })
 
-  app.listen(config.port, () => console.log(`🚀 server running at: http://localhost:${config.port}${config.gqlPath}`))
+  app.listen(config.port, () => Logger.info(
+    `[Bootstrap] Server running at: http://localhost:${config.port}${config.gqlPath} 🚀`
+  ))
 }
