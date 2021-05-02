@@ -7,43 +7,43 @@ import { TodoDto } from './dto/todo.dto'
 import { isAuth, HttpCtx } from '../../middlewares'
 
 @Service()
-@Resolver((of) => Todo)
+@Resolver(() => Todo)
 export default class TodoResolver {
   constructor(private readonly todoService: TodoService) { }
 
-  @Query((returns) => Todo)
+  @Query(() => Todo)
   @UseMiddleware(isAuth)
-  async getTodo(@Arg('id') id: ObjectId): Promise<Todo | null> {
-    return await this.todoService.getById(id)
+  async getTodo(@Ctx() { payload }: HttpCtx, @Arg('id') id: ObjectId): Promise<Todo | null> {
+    return await this.todoService.getById(id, payload!.id)
   }
 
-  @Query((returns) => [Todo])
+  @Query(() => [Todo])
   @UseMiddleware(isAuth)
   async getAll(@Ctx() { payload }: HttpCtx): Promise<Todo[]> {
     return await this.todoService.getAll(payload!.id)
   }
 
-  @Query((returns) => [Todo])
+  @Query(() => [Todo])
   @UseMiddleware(isAuth)
-  async getByDone(): Promise<Todo[]> {
-    return await this.todoService.findByDone()
+  async getByDone(@Ctx() { payload }: HttpCtx): Promise<Todo[]> {
+    return await this.todoService.findByDone(payload!.id)
   }
 
-  @Mutation((returns) => Todo)
+  @Mutation(() => Todo)
   @UseMiddleware(isAuth)
   async createTodo(@Ctx() { payload }: HttpCtx, @Arg('createTodoData') createTodoData: TodoDto): Promise<Todo> {
     return await this.todoService.addTodo(createTodoData, payload!.id)
   }
 
-  @Mutation((returns) => Todo)
+  @Mutation(() => Todo)
   @UseMiddleware(isAuth)
-  async updateOne(@Arg('updateContent') updateContent: TodoDto, @Arg('id') id: ObjectId): Promise<Todo | null> {
-    return await this.todoService.updateOne(id, updateContent)
+  async updateOne(@Ctx() { payload }: HttpCtx, @Arg('updateContent') updateContent: TodoDto, @Arg('id') id: ObjectId): Promise<Todo | null> {
+    return await this.todoService.updateOne(id, updateContent, payload!.id)
   }
 
-  @Mutation((returns) => Todo)
+  @Mutation(() => Todo)
   @UseMiddleware(isAuth)
-  async delete(@Arg('id') id: ObjectId): Promise<Todo | null> {
-    return await this.todoService.deleteOne(id)
+  async delete(@Ctx() { payload }: HttpCtx, @Arg('id') id: ObjectId): Promise<Todo | null> {
+    return await this.todoService.deleteOne(id, payload!.id)
   }
 }

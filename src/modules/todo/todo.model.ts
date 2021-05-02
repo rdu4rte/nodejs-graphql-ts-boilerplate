@@ -12,8 +12,8 @@ export const TodoMongooseModel = getModelForClass(Todo)
 export default class TodoModel {
   constructor(private readonly userModel: UserModel) { }
 
-  async getById(_id: ObjectId): Promise<Todo | null> {
-    return await TodoMongooseModel.findById(_id).lean().exec()
+  async getById(_id: ObjectId, payload: ObjectId): Promise<Todo | null> {
+    return await TodoMongooseModel.where({ _user: payload }).findOne({ _id: _id }).lean().exec()
   }
 
   async create(data: TodoDto, payload: ObjectId): Promise<Todo> {
@@ -32,15 +32,15 @@ export default class TodoModel {
     return await TodoMongooseModel.find({ _user: payload })
   }
 
-  async update(id: ObjectId, data: TodoDto): Promise<Todo | null> {
-    return await TodoMongooseModel.findByIdAndUpdate(id, data)
+  async update(id: ObjectId, data: TodoDto, payload: ObjectId): Promise<Todo | null> {
+    return await TodoMongooseModel.findByIdAndUpdate(id, data).where({ _user: payload })
   }
 
-  async delete(id: ObjectId): Promise<Todo | null> {
-    return await TodoMongooseModel.findByIdAndDelete(id)
+  async delete(id: ObjectId, payload: ObjectId): Promise<Todo | null> {
+    return await TodoMongooseModel.findByIdAndDelete(id).where({ _user: payload })
   }
 
-  async findByDone(): Promise<Todo[]> {
-    return await TodoMongooseModel.find({ done: true })
+  async findByDone(payload: ObjectId): Promise<Todo[]> {
+    return await TodoMongooseModel.where({ _user: payload }).find({ done: true })
   }
 }
