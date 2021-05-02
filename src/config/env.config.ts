@@ -16,9 +16,9 @@ export interface Config {
   mongoDb: {
     uri: string
   }
-  redis: {
-    host: string
-    port: number
+  jwt: {
+    secret: string
+    expiresIn: number
   }
   argonSalt: number
 }
@@ -30,9 +30,9 @@ export const config: Config = {
   mongoDb: {
     uri: env('MONGODB_URI')
   },
-  redis: {
-    port: +env('REDIS_PORT'),
-    host: env('REDIS_HOST')
+  jwt: {
+    secret: env('JWT_SECRET'),
+    expiresIn: +env('JWT_EXPIRESIN')
   },
   argonSalt: +env('SALT')
 }

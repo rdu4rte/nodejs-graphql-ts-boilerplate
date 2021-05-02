@@ -4,5 +4,9 @@ import { ObjectId } from 'mongodb'
 export interface HttpCtx {
   req: Request
   res: Response
-  payload?: { userId: ObjectId }
+  payload?: {
+    id: ObjectId
+    iat: number
+    exp: number
+  }
 }
