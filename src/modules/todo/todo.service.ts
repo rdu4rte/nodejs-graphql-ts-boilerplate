@@ -2,7 +2,7 @@ import { Service } from 'typedi'
 import TodoModel from './todo.model'
 import { ObjectId } from 'mongodb'
 import { Todo } from '../../entities'
-import { TodoDto } from './todo.dto'
+import { TodoDto } from './dto/todo.dto'
 
 @Service()
 export default class TodoService {
@@ -12,16 +12,13 @@ export default class TodoService {
     return this.todoModel.getById(_id)
   }
 
-  public async addTodo(data: TodoDto): Promise<Todo> {
-    const newTodo = await this.todoModel.create(data)
-
-    // business logic here ...
-
+  public async addTodo(data: TodoDto, payload: ObjectId): Promise<Todo | any> {
+    const newTodo = await this.todoModel.create(data, payload)
     return newTodo
   }
 
-  public async getAll(): Promise<Todo[]> {
-    return this.todoModel.find()
+  public async getAll(payload: ObjectId): Promise<Todo[]> {
+    return this.todoModel.find(payload)
   }
 
   public async updateOne(id: ObjectId, data: TodoDto): Promise<Todo | null> {

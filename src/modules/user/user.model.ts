@@ -1,4 +1,5 @@
 import { getModelForClass } from '@typegoose/typegoose'
+import { ObjectId } from 'mongodb'
 import { Service } from 'typedi'
 import { User } from '../../entities/user.entity'
 
@@ -20,5 +21,9 @@ export default class UserModel {
   async findByUsername(username: string): Promise<User | null> {
     const user = await UserMongooseModel.findOne({ username: username }).select('+password')
     return user
+  }
+
+  async findById(id: ObjectId): Promise<User | null> {
+    return await UserMongooseModel.findById(id)
   }
 }
