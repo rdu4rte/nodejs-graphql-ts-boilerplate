@@ -27,5 +27,5 @@ export class Todo {
 
   @prop({ ref: () => User })
   @Field(() => User, { nullable: true })
-  _user?: Ref<User>
+  _user!: Ref<User>
 }
