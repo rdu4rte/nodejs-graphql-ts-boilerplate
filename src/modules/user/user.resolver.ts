@@ -7,18 +7,18 @@ import { isAuth } from '../../middlewares'
 import { JwtResponse, CredentialsDto } from './dto/credentials.dto'
 
 @Service()
-@Resolver((of) => User)
+@Resolver(() => User)
 export default class UserResolver {
   constructor(private readonly userService: UserService) { }
 
-  @Query((returns) => [User])
+  @Query(() => [User])
   @UseMiddleware(isAuth)
   async getUsers(): Promise<User[]> {
     return await this.userService.fetchUsers()
   }
 
-  @Mutation((returns) => User)
-  async createUser(@Arg('createUser') createUserData: UserDto): Promise<User> {
+  @Mutation(() => User)
+  async createUser(@Arg('UserDto') createUserData: UserDto): Promise<User> {
     return await this.userService.createUser(createUserData)
   }
 
