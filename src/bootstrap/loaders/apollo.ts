@@ -8,6 +8,6 @@ export default async (): Promise<ApolloServer> => {
   return new ApolloServer({
     schema,
     playground: config.isDev,
-    context: ({ req, res }) => ({ req, res })
+    context: async ({ req, res }) => ({ req, res })
   })
 }
