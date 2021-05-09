@@ -18,8 +18,8 @@ export default class UserResolver {
   }
 
   @Mutation(() => User)
-  async createUser(@Arg('UserDto') createUserData: UserDto): Promise<User> {
-    return await this.userService.createUser(createUserData)
+  async createUser(@Arg('user') user: UserDto): Promise<User> {
+    return await this.userService.createUser(user)
   }
 
   @Mutation(() => JwtResponse)

@@ -39,8 +39,4 @@ export default class TodoModel {
   async delete(id: ObjectId, payload: ObjectId): Promise<Todo | null> {
     return await TodoMongooseModel.findByIdAndDelete(id).where({ _user: payload })
   }
-
-  async findByDone(payload: ObjectId): Promise<Todo[]> {
-    return await TodoMongooseModel.where({ _user: payload }).find({ done: true })
-  }
 }

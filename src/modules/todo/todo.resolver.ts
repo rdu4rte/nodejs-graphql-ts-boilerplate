@@ -13,32 +13,26 @@ export default class TodoResolver {
 
   @Query(() => Todo)
   @UseMiddleware(isAuth)
-  async getTodo(@Ctx() { payload }: HttpCtx, @Arg('id') id: ObjectId): Promise<Todo | null> {
+  async todo(@Ctx() { payload }: HttpCtx, @Arg('id') id: ObjectId): Promise<Todo | null> {
     return await this.todoService.getById(id, payload!.id)
   }
 
   @Query(() => [Todo])
   @UseMiddleware(isAuth)
-  async getAll(@Ctx() { payload }: HttpCtx): Promise<Todo[]> {
+  async todos(@Ctx() { payload }: HttpCtx): Promise<Todo[]> {
     return await this.todoService.getAll(payload!.id)
   }
 
-  @Query(() => [Todo])
+  @Mutation(() => Todo)
   @UseMiddleware(isAuth)
-  async getByDone(@Ctx() { payload }: HttpCtx): Promise<Todo[]> {
-    return await this.todoService.findByDone(payload!.id)
+  async createTodo(@Ctx() { payload }: HttpCtx, @Arg('todo') todo: TodoDto): Promise<Todo> {
+    return await this.todoService.addTodo(todo, payload!.id)
   }
 
   @Mutation(() => Todo)
   @UseMiddleware(isAuth)
-  async createTodo(@Ctx() { payload }: HttpCtx, @Arg('createTodoData') createTodoData: TodoDto): Promise<Todo> {
-    return await this.todoService.addTodo(createTodoData, payload!.id)
-  }
-
-  @Mutation(() => Todo)
-  @UseMiddleware(isAuth)
-  async updateOne(@Ctx() { payload }: HttpCtx, @Arg('updateContent') updateContent: TodoDto, @Arg('id') id: ObjectId): Promise<Todo | null> {
-    return await this.todoService.updateOne(id, updateContent, payload!.id)
+  async update(@Ctx() { payload }: HttpCtx, @Arg('todo') todo: TodoDto, @Arg('id') id: ObjectId): Promise<Todo | null> {
+    return await this.todoService.updateOne(id, todo, payload!.id)
   }
 
   @Mutation(() => Todo)

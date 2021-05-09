@@ -28,8 +28,4 @@ export default class TodoService {
   public async deleteOne(id: ObjectId, payload: ObjectId): Promise<Todo | null> {
     return await this.todoModel.delete(id, payload)
   }
-
-  public async findByDone(payload: ObjectId): Promise<Todo[]> {
-    return await this.todoModel.findByDone(payload)
-  }
 }
