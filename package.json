@@ -6,7 +6,9 @@
   "scripts": {
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
     "prepare": "husky install",
-    "dev": "NODE_ENV=development nodemon ./src/server.ts"
+    "dev": "NODE_ENV=development nodemon ./src/server.ts",
+    "build": "rimraf ./dist && tsc",
+    "start": "NODE_ENV=production node ./dist/server.js"
   },
   "repository": {
     "type": "git",
