@@ -1,6 +1,0 @@
-@ template:
-  # install packages:
-    - dev dependencies:
-      $ npm i -D typescript jest ts-node-dev ts-jest rimraf apollo-server-testing @types/node @types/jest @types/helmet @shelf/jest-mongodb nodemon @types/dotenv @types/mongoose eslint-config-standard-with-typescript eslint-plugin-import eslint-plugin-json eslint-plugin-node eslint-plugin-promise git-commit-msg-linter lint-staged @typescript-eslint/eslint-plugin husky
-    - dependencies:
-      $ npm i --save express typedi graphql type-graphql reflect-metadata mongoose helmet dotenv cors class-validator apollo-server-express @typegoose/typegoose winston argon2
